@@ -2,34 +2,29 @@ import * as React from 'react';
 import paymentRequest, { PaymentRequestInterface } from 'react-payment-request-api';
 import { connect } from 'react-redux';
 
-import styles from './styles';
+import styles from '../styles';
+import { Button, Icon } from 'semantic-ui-react'
 
-export interface OwnProps {
-  style: React.CSSProperties;
-}
-
-export interface ProcessError {
-  id?: number,
-  message?: string
-}
+import { OwnProps, ProcessError } from '../utils/interfaces'
 
 export interface StateProps {
   payed: boolean;
   error?: ProcessError
 }
 
-const Button: React.StatelessComponent<PaymentRequestInterface & OwnProps & StateProps> = ({
+const PayButton: React.StatelessComponent<PaymentRequestInterface & OwnProps & StateProps> = ({
   show, isSupported, style, payed,
 }) => isSupported
   ?  (
-    <button onClick={show} style={{ ...style, ...(payed ? styles.payed : styles.toPay) }} disabled={payed}>
-      {payed ? 'Payed' : 'Pay now'}
-    </button>
+    <Button icon='payment' onClick={show} style={{ ...style, ...(payed ? styles.payed : styles.toPay) }} disabled={payed}>
+      <Icon inverted name='payment' size='small' />
+      {payed ? 'Payed' : 'Pay Now'}
+    </Button>
   )
   : <span>Web Payments API not supported</span>;
 
 const ConnectedButton = connect<StateProps, void, OwnProps>((state) => ({
   payed: state.payed
-}))(Button);
+}))(PayButton);
 
 export default paymentRequest<OwnProps>()(ConnectedButton);

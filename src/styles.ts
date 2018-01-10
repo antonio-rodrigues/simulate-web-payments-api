@@ -32,12 +32,18 @@ export default {
     flexGrow: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    alignContent: 'center',
+    textAlign: 'center',
+    padding: '2rem',
   } as React.CSSProperties,
+  wrapper: {
+    padding: '1rem',
+  },
   button: {
     boxShadow: '0 0 1px #fff inset',
     borderRadius: '1rem',
-    padding: '1rem 2rem',
-    font: '3rem Calibri, Arial, sans-serif',
+    padding: '0.5rem 1rem',
+    font: '1.8rem Calibri, Arial, sans-serif',
     textShadow: '1px 1px 0 rgba(255,255,255,0.4)',
   },
   toPay: {

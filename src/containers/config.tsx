@@ -1,9 +1,5 @@
 import { PaymentRequestParams } from 'react-payment-request-api';
-
-export interface ProcessError {
-  id?: number,
-  message?: string
-}
+import { ProcessError } from '../utils/interfaces'
 
 const details: PaymentDetails = {
   displayItems: [{
