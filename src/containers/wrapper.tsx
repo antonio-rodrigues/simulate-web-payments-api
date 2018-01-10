@@ -2,14 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import Button from './button';
+import PayButton from '../components/payButton';
 import getConfig from './config';
-import { State } from './reducers';
-
-export interface ProcessError {
-  id?: number,
-  message?: string
-}
+import { State } from '../store/reducers/pay';
+import { OwnProps, ProcessError } from '../utils/interfaces'
 
 interface StateProps {
   supportedPaymentCards: string[];
@@ -21,15 +17,11 @@ interface DispatchProps {
   onShowFail: (payload: ProcessError) => void;
 }
 
-interface OwnProps {
-  style: React.CSSProperties;
-}
-
 const Wrapper: React.StatelessComponent<StateProps & DispatchProps & OwnProps> = ({
   style, supportedPaymentCards, error, onShowSuccess, onShowFail
 }) => (
   <div>
-    <Button
+    <PayButton
       config={getConfig(supportedPaymentCards, onShowSuccess, onShowFail)}
       style={style}
     />
