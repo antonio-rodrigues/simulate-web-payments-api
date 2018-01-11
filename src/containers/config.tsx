@@ -1,6 +1,19 @@
 import { PaymentRequestParams } from 'react-payment-request-api';
 import { ProcessError } from '../utils/interfaces'
 
+const handleShowFail = (err: any) => {
+  let retVal: ProcessError = {}
+  if (!err.hasOwnProperty('id')) { // empty response
+    retVal.id = -1
+    retVal.message = 'Operation cancelled'
+  } else {
+    if (err.id && err.message) {
+      retVal = err
+    }
+  }
+  return retVal
+}
+
 const details: PaymentDetails = {
   displayItems: [{
     label: 'Simulated amount',
@@ -36,20 +49,11 @@ const getConfig = (supportedPaymentCards: string[], onShowSuccess: () => void, o
     /* tslint:disable-next-line:no-console */
     console.log('Result:', result);
     // make the payment
-    setTimeout(() => { onShowSuccess(); resolve(); }, 2000);
+    setTimeout(() => { onShowSuccess(); resolve(result); }, 2000);
   },
   onShowFail: (err: any): void => {
-    let retVal: ProcessError = {}
-    if (!err.hasOwnProperty('id')) { // empty response
-      retVal.id = -1
-      retVal.message = 'Operation cancelled'
-    } else {
-      if (err.id && err.message) {
-        retVal = err
-      }
-    }
     // abort
-    setTimeout(() => { onShowFail(retVal); return retVal; }, 1000);
+    setTimeout(() => { return handleShowFail(err) }, 1000);
   },
   /* tslint:disable-next-line:no-console */
   // onShowFail: (err: any) => console.error(err),
