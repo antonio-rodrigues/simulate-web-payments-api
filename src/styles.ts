@@ -36,6 +36,12 @@ export default {
     textAlign: 'center',
     padding: '2rem',
   } as React.CSSProperties,
+  contentContainer: {
+    textAlign: 'center',
+    height: '100%',
+    verticalAlign: 'middle',
+    padding: '2rem',
+  },
   wrapper: {
     padding: '1rem',
   },
@@ -56,4 +62,8 @@ export default {
     border: '1px solid #84c38c',
     color: '#0f6d1c',
   },
+  json: {
+    fontFace: 'Courier',
+    color: '#c41938'
+  }
 };

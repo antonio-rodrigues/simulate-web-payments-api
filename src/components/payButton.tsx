@@ -16,12 +16,12 @@ const PayButton: React.StatelessComponent<PaymentRequestInterface & OwnProps & S
   show, isSupported, style, payed,
 }) => isSupported
   ?  (
-    <Button icon='payment' onClick={show} style={{ ...style, ...(payed ? styles.payed : styles.toPay) }} disabled={payed}>
-      <Icon inverted name='payment' size='small' />
+    <Button onClick={show} style={{ ...style, ...(payed ? styles.payed : styles.toPay) }} disabled={payed}>
+      <Icon inverted={!payed} name="payment" size="small" />
       {payed ? 'Payed' : 'Pay Now'}
     </Button>
   )
-  : <span>Web Payments API not supported</span>;
+  : <span>Web Payments API not supported by this browser</span>;
 
 const ConnectedButton = connect<StateProps, void, OwnProps>((state) => ({
   payed: state.payed
